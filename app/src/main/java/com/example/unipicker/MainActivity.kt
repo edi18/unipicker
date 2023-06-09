@@ -19,6 +19,7 @@ import com.example.unipicker.ui.result.ResultScreen
 import com.example.unipicker.ui.theme.UnipickerTheme
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.unipicker.data.Question
 import com.example.unipicker.ui.question.QuestionViewModel
 
@@ -54,7 +55,7 @@ fun UnipickerApp(
         context = LocalContext.current
     )
     NavHost(
-        navController = navController,
+        navController = rememberNavController(),
         startDestination = unipickerScreen.Home.name,
         modifier = Modifier.padding(16.dp)
     ) {

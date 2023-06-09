@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -38,6 +39,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.modifier.modifierLocalConsumer
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -48,10 +50,23 @@ import com.example.unipicker.R
 fun HomeScreen(
     onNextButtonClicked: () -> Unit
 ) {
+    val configuration = LocalConfiguration.current
+    val screenHeight = configuration.screenHeightDp.dp
+    val screenWidth = configuration.screenWidthDp.dp
+
+    val verticalPaddingTop = (screenHeight * 0.05f)
+    val verticalPaddingBottom = (screenHeight * 0.20f)
+    val horizontalPadding = (screenWidth * 0.15f)
+
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(top = 20.dp, bottom = 200.dp, start = 50.dp, end = 50.dp),
+            .padding(
+                top = verticalPaddingTop,
+                bottom = verticalPaddingBottom,
+                start = horizontalPadding,
+                end = horizontalPadding
+    ),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -64,7 +79,8 @@ fun HomeScreen(
         )
 
         val imageModifier = Modifier
-            .size(300.dp)
+            .fillMaxWidth()
+            .aspectRatio(1f)
             .clip(shape = CircleShape)
         val image: Painter = painterResource(id = R.drawable.naslovna) // Replace with your image resource
 
@@ -74,7 +90,7 @@ fun HomeScreen(
             modifier = imageModifier,
         )
 
-        Spacer(modifier = Modifier.height(50.dp))
+        Spacer(modifier = Modifier.height(verticalPaddingBottom))
 
         AnimatedButton(onNextButtonClicked)
     }
