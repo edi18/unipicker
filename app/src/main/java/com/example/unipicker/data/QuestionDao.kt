@@ -10,7 +10,7 @@ interface QuestionDao {
     @Insert
     fun insertQuestion(question: Question)
 
-    @Query("select * from question")
+    @Query("select * from question order by random()")
     fun getAllQuestions(): List<Question>
 
     @Query("select * from question where grouping = :grouping")

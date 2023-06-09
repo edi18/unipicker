@@ -103,7 +103,7 @@ fun ResultScreen(
                 .padding(vertical = 16.dp)
         ) {
             Text(
-                text = "Probaj Opet",
+                text = "Pokušaj ponovo",
                 modifier = Modifier.padding(16.dp),
                 style = MaterialTheme.typography.headlineSmall
             )

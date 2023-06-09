@@ -60,7 +60,7 @@ fun QuestionScreen(
             value = agreementLevel.toFloat(),
             onValueChange = { value -> agreementLevel = value.toInt() },
             valueRange = 1f..5f,
-            steps = 5,
+            steps = 1,
             modifier = Modifier.fillMaxWidth()
         )
 
