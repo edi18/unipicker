@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "question",
+@Entity(tableName = "faculty",
     foreignKeys = [
         ForeignKey(
             entity = Grouping::class,
@@ -14,9 +14,9 @@ import androidx.room.PrimaryKey
         )
     ]
 )
-data class Question(
+data class Faculty(
     @PrimaryKey
     val id: Int,
-    val text: String,
+    val name: String,
     val grouping: Int
 )
