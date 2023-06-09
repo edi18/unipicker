@@ -45,7 +45,9 @@ import com.example.unipicker.R
 
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    onNextButtonClicked: () -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -74,12 +76,12 @@ fun HomeScreen() {
 
         Spacer(modifier = Modifier.height(50.dp))
 
-        AnimatedButton()
+        AnimatedButton(onNextButtonClicked)
     }
 }
 
 @Composable
-fun AnimatedButton() {
+fun AnimatedButton(onNextButtonClicked: () -> Unit) {
     var isButtonUp by remember { mutableStateOf(false) }
 
     val animatedValue by animateDpAsState(
@@ -95,7 +97,7 @@ fun AnimatedButton() {
 
     Button(
         onClick = {
-            isButtonUp = !isButtonUp
+            onNextButtonClicked()
         },
         modifier = Modifier
             .fillMaxWidth()
