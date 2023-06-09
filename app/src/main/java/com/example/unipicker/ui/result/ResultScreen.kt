@@ -45,13 +45,22 @@ fun ResultScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         val rez = arrayOf(
-        "STEM" to results[0],
-        "Prirodne nauke" to results[1],
-        "Drustvene nauke" to  results[2],
-        "Humanisticke nauke" to results[3],
-        "Umjetnost" to  results[4],
-        "Medicina" to  results[5]
-    )
+            "Društvene nauke" to results[0],
+            "Humanističke nauke" to results[1],
+            "Medicinske nauke" to  results[2],
+            "STEM" to results[3],
+            "Tehničke nauke" to  results[4],
+            "Umjetnosti" to  results[5]
+        ).sortedBy { (_, value) -> value }.reversed()
+
+        var max = 0
+        var grana: String = rez[0].first
+        for (item in rez) {
+            if (item.second > max) {
+                max = item.second
+                grana = item.first
+            }
+        }
 
         val formattedString = rez.joinToString(separator = "\n") { (name, points) ->
             "$name - $points poena"
@@ -65,7 +74,7 @@ fun ResultScreen(
         )
 
         Text(
-            text = "STEM",
+            text = grana,
             style = MaterialTheme.typography.headlineLarge,
             color = MaterialTheme.colorScheme.primary,
             modifier = Modifier.padding(bottom = 8.dp)
@@ -75,7 +84,8 @@ fun ResultScreen(
 
         SquareCanvas( modifier =  Modifier
             .padding(10.dp)
-            .aspectRatio(1f)
+            .aspectRatio(1f),
+            results
         )
 
         Text(
@@ -103,7 +113,7 @@ fun ResultScreen(
 }
 
 @Composable
-fun SquareCanvas(modifier: Modifier = Modifier) {
+fun SquareCanvas(modifier: Modifier = Modifier, results: MutableList<Int>) {
     var size by remember { mutableStateOf(0) }
 
     Box(
@@ -148,7 +158,13 @@ fun SquareCanvas(modifier: Modifier = Modifier) {
                 )
 
                 if (i == numHexagons-1) {
-                    val values = listOf(0.7f, 0.5f, 0.8f, 0.5f, 0.7f, 0.2f) // Example values
+                    //val values = listOf(0.7f, 0.5f, 0.8f, 0.5f, 0.7f, 0.2f) // Example values
+
+                    val values = mutableListOf<Float>()
+
+                    for (item in results) {
+                        values.add(item.toFloat() / 12.0f)
+                    }
 
                     drawIrregularHexagon(centerX, centerY, initialRadius, values)
                 }

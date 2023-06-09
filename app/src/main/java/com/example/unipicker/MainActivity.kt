@@ -74,7 +74,7 @@ fun UnipickerApp(
             var currentQuestionIndex by remember { mutableStateOf(0) }
 
             val sendBackResponse = fun (n:Int) {
-                state[questionsList[currentQuestionIndex].grouping - 1] += n
+                state[questionsList[currentQuestionIndex].grouping - 1] += n - 1
                 currentQuestionIndex++
             }
 
