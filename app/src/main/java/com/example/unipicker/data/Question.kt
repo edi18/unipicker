@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "question",
     foreignKeys = [
         ForeignKey(
-            entity = Grouping::class,
+            entity = Groupation::class,
             parentColumns = ["id"],
             childColumns = ["grouping"],
             onDelete = ForeignKey.CASCADE

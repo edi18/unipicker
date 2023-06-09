@@ -5,7 +5,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 abstract class AppDatabase: RoomDatabase() {
-    abstract fun groupingDao(): GroupingDao
+    abstract fun groupingDao(): GroupatioDao
     abstract fun questionDao(): QuestionDao
     abstract fun facultyDao(): FacultyDao
 
@@ -18,8 +18,9 @@ abstract class AppDatabase: RoomDatabase() {
                 Room.databaseBuilder(
                     context,
                     AppDatabase::class.java,
-                    "app_database"
+                    "unipicker.db"
                 )
+                    .createFromAsset("database/unipicker.db")
                     .fallbackToDestructiveMigration()
                     .build()
                     .also { Instance = it }

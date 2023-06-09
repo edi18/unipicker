@@ -12,4 +12,7 @@ interface QuestionDao {
 
     @Query("select * from question")
     fun getAllQuestions(): Flow<List<Question>>
+
+    @Query("select * from question where grouping = :grouping")
+    fun getAllQuestionsFromGrouping(grouping: Int): Flow<Question>
 }
