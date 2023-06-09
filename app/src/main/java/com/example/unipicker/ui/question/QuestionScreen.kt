@@ -36,9 +36,9 @@ fun QuestionScreen(
     var agreementText = when (agreementLevel) {
         1 -> "Ne, nikako"
         2 -> "Pomalo, ne puno"
-        3 -> "Donekle se slazem"
-        4 -> "Slazem se"
-        5 -> "Apsolutno Alaha mii"
+        3 -> "Donekle se slažem"
+        4 -> "Slažem se"
+        5 -> "Apsolutno se slažem"
         else -> "Unknown"
     }
 
@@ -60,7 +60,7 @@ fun QuestionScreen(
             value = agreementLevel.toFloat(),
             onValueChange = { value -> agreementLevel = value.toInt() },
             valueRange = 1f..5f,
-            steps = 4,
+            steps = 5,
             modifier = Modifier.fillMaxWidth()
         )
 

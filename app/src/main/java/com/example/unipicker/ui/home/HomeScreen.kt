@@ -117,12 +117,12 @@ fun AnimatedButton(onNextButtonClicked: () -> Unit) {
         },
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 16.dp)
+            .padding(vertical = 2.dp)
             .offset(y = animatedValue)
     ) {
         Text(
             text = "Započni kviz",
-            modifier = Modifier.padding(16.dp),
+            modifier = Modifier.padding(2.dp),
             style = MaterialTheme.typography.headlineLarge
         )
     }
