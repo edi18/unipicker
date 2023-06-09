@@ -22,6 +22,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.unipicker.data.Question
 import com.example.unipicker.ui.question.QuestionViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.runBlocking
 
 
 class MainActivity : ComponentActivity() {
@@ -67,7 +70,7 @@ fun UnipickerApp(
 
         composable(route = unipickerScreen.Question.name){
 
-            val questionsList by viewModel.getAllQuestions().collectAsState(initial = emptyList())
+            val questionsList = convertFlowToList(viewModel.getAllQuestions())
 
             var currentQuestionIndex by remember { mutableStateOf(0) }
 
@@ -83,4 +86,11 @@ fun UnipickerApp(
             ResultScreen({}, state)
         }
     }
+}
+
+fun <A> convertFlowToList(flowList: Flow<List<A>>): List<A> = runBlocking {
+    flowList
+        .flatMapConcat { it.asFlow() }
+        .flowOn(Dispatchers.Default)
+        .toList()
 }
