@@ -3,6 +3,7 @@ package com.example.unipicker.data
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import org.jetbrains.annotations.NotNull
 
 @Entity(tableName = "question",
     foreignKeys = [

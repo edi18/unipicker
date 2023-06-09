@@ -13,7 +13,7 @@ class QuestionViewModel(
     private val questionDao: QuestionDao,
     private val groupatioDao: GroupatioDao
 ): ViewModel() {
-    fun getAllQuestions(): Flow<List<Question>> = questionDao.getAllQuestions()
+    fun getAllQuestions(): List<Question> = questionDao.getAllQuestions()
     fun getAllQuestionsFromGrouping(grouping: Int): Flow<Question> = questionDao.getAllQuestionsFromGrouping(grouping)
     fun getGroupation(id: Int): Flow<Groupation> = groupatioDao.getGroupation(id)
     fun getAllGroupations(): Flow<List<Groupation>> = groupatioDao.getAllGroupations()

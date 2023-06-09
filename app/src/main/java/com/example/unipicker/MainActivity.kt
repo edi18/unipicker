@@ -24,6 +24,7 @@ import com.example.unipicker.data.Question
 import com.example.unipicker.ui.question.QuestionViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 
@@ -55,23 +56,22 @@ fun UnipickerApp(
     viewModel: QuestionViewModel = viewModel(factory = QuestionViewModel.factory),
     navController: NavHostController = rememberNavController()
 ) {
+    val questionsList = viewModel.getAllQuestions()
+
+    var state by remember {
+        mutableStateOf(mutableListOf<Int>(0,0,0,0,0,0))
+    }
+
     NavHost(
         navController = navController,
         startDestination = unipickerScreen.Home.name,
         modifier = Modifier.padding(16.dp)
     ) {
-
-
-        var state = mutableListOf<Int>(0,0,0,0,0,0)
-
         composable(route = unipickerScreen.Home.name){
             HomeScreen({ navController.navigate(unipickerScreen.Question.name) })
         }
 
         composable(route = unipickerScreen.Question.name){
-
-            val questionsList = convertFlowToList(viewModel.getAllQuestions())
-
             var currentQuestionIndex by remember { mutableStateOf(0) }
 
             val sendBackResponse = fun (n:Int) {

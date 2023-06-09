@@ -11,7 +11,7 @@ interface QuestionDao {
     fun insertQuestion(question: Question)
 
     @Query("select * from question")
-    fun getAllQuestions(): Flow<List<Question>>
+    fun getAllQuestions(): List<Question>
 
     @Query("select * from question where grouping = :grouping")
     fun getAllQuestionsFromGrouping(grouping: Int): Flow<Question>
