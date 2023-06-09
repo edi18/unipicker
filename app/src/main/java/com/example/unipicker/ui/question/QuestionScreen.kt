@@ -26,7 +26,8 @@ import com.example.unipicker.data.Question
 fun QuestionScreen(
     navigateToNextScreen: () -> Unit,
     question: Question,
-    sendBackResponse : (Int) -> Unit
+    sendBackResponse : (Int) -> Unit,
+    last: Boolean
 ) {
     // State to hold the selected agreement level
     var agreementLevel by remember { mutableStateOf(3) }
@@ -72,6 +73,9 @@ fun QuestionScreen(
         Spacer(modifier = Modifier.height(50.dp))
 
         Button(onClick = {
+            if (last)
+                navigateToNextScreen()
+            else
             sendBackResponse(agreementLevel)
         }) {
 

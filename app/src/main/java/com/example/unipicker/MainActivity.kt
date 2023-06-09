@@ -24,7 +24,6 @@ import com.example.unipicker.data.Question
 import com.example.unipicker.ui.question.QuestionViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 
@@ -79,11 +78,11 @@ fun UnipickerApp(
                 currentQuestionIndex++
             }
 
-            QuestionScreen(question = questionsList[currentQuestionIndex], navigateToNextScreen = {}, sendBackResponse = sendBackResponse )
+            QuestionScreen(question = questionsList[currentQuestionIndex], navigateToNextScreen = {navController.navigate(unipickerScreen.Result.name)}, sendBackResponse = sendBackResponse, last = currentQuestionIndex == questionsList.size-1 )
         }
 
         composable(route = unipickerScreen.Result.name){
-            ResultScreen({}, state)
+            ResultScreen(navigateToNextScreen = {navController.navigate(unipickerScreen.Result.name)}, state)
         }
     }
 }
