@@ -55,14 +55,15 @@ fun UnipickerApp(
     viewModel: QuestionViewModel = viewModel(factory = QuestionViewModel.factory),
     navController: NavHostController = rememberNavController()
 ) {
+
+    var state by remember {
+        mutableStateOf(mutableListOf<Int>(0,0,0,0,0,0))
+    }
     NavHost(
         navController = navController,
         startDestination = unipickerScreen.Home.name,
         modifier = Modifier.padding(16.dp)
     ) {
-
-
-        var state = mutableListOf<Int>(0,0,0,0,0,0)
 
         composable(route = unipickerScreen.Home.name){
             HomeScreen({ navController.navigate(unipickerScreen.Question.name) })
@@ -79,11 +80,11 @@ fun UnipickerApp(
                 currentQuestionIndex++
             }
 
-            QuestionScreen(question = questionsList[currentQuestionIndex], navigateToNextScreen = {}, sendBackResponse = sendBackResponse )
+            QuestionScreen(question = questionsList[currentQuestionIndex], navigateToNextScreen = {navController.navigate(unipickerScreen.Result.name)}, sendBackResponse = sendBackResponse, last = currentQuestionIndex == questionsList.size-1 )
         }
 
         composable(route = unipickerScreen.Result.name){
-            ResultScreen({}, state)
+            ResultScreen(navigateToNextScreen = {navController.navigate(unipickerScreen.Result.name)}, state)
         }
     }
 }
