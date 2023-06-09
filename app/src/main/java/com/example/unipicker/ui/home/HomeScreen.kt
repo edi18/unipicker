@@ -71,7 +71,7 @@ fun HomeScreen(
         verticalArrangement = Arrangement.Center
     ) {
         Text(
-            text = "Koji fakultet je ZA TEBE??",
+            text = "Koji fakultet je za vas?",
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.displayLarge,
             color = MaterialTheme.colorScheme.primary,
