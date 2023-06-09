@@ -49,13 +49,11 @@ enum class unipickerScreen() {
 
 @Composable
 fun UnipickerApp(
-    viewModel: QuestionViewModel = viewModel(factory = QuestionViewModel.factory)
+    viewModel: QuestionViewModel = viewModel(factory = QuestionViewModel.factory),
+    navController: NavHostController = rememberNavController()
 ) {
-    val navController = NavHostController(
-        context = LocalContext.current
-    )
     NavHost(
-        navController = rememberNavController(),
+        navController = navController,
         startDestination = unipickerScreen.Home.name,
         modifier = Modifier.padding(16.dp)
     ) {
@@ -64,7 +62,7 @@ fun UnipickerApp(
         var state = mutableListOf<Int>(0,0,0,0,0,0)
 
         composable(route = unipickerScreen.Home.name){
-            HomeScreen({})
+            HomeScreen({ navController.navigate(unipickerScreen.Question.name) })
         }
 
         composable(route = unipickerScreen.Question.name){
