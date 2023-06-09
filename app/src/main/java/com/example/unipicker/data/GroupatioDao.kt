@@ -13,6 +13,6 @@ interface GroupatioDao {
     @Query("select * from groupation")
     fun getAllGroupations(): Flow<List<Groupation>>
 
-    @Query("select * from groupation where = :id")
+    @Query("select * from groupation where id = :id")
     fun getGroupation(id: Int): Flow<Groupation>
 }

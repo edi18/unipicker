@@ -68,10 +68,7 @@ fun UnipickerApp(
 
         composable(route = unipickerScreen.Question.name){
 
-            var questionsList = listOf<Question>(
-
-            )
-
+            val questionsList by viewModel.getAllQuestions().collectAsState(initial = emptyList())
 
             var currentQuestionIndex by remember { mutableStateOf(0) }
 
@@ -80,7 +77,7 @@ fun UnipickerApp(
                 currentQuestionIndex++
             }
 
-            QuestionScreen(question = Question(1, "pitanjeeeeeee?", 1), navigateToNextScreen = {}, sendBackResponse = sendBackResponse )
+            QuestionScreen(question = questionsList[currentQuestionIndex], navigateToNextScreen = {}, sendBackResponse = sendBackResponse )
         }
 
         composable(route = unipickerScreen.Result.name){

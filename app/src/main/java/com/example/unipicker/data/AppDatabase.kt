@@ -1,13 +1,14 @@
 package com.example.unipicker.data
 
 import android.content.Context
+import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
+@Database(entities = [Question::class, Groupation::class], version = 1)
 abstract class AppDatabase: RoomDatabase() {
     abstract fun groupingDao(): GroupatioDao
     abstract fun questionDao(): QuestionDao
-    abstract fun facultyDao(): FacultyDao
 
     companion object {
         @Volatile

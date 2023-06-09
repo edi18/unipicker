@@ -11,8 +11,7 @@ import kotlinx.coroutines.flow.Flow
 
 class QuestionViewModel(
     private val questionDao: QuestionDao,
-    private val groupatioDao: GroupatioDao,
-    private val facultyDao: FacultyDao,
+    private val groupatioDao: GroupatioDao
 ): ViewModel() {
     fun getAllQuestions(): Flow<List<Question>> = questionDao.getAllQuestions()
     fun getAllQuestionsFromGrouping(grouping: Int): Flow<Question> = questionDao.getAllQuestionsFromGrouping(grouping)
@@ -25,8 +24,7 @@ class QuestionViewModel(
                 val application = (this[APPLICATION_KEY] as UnipickerApplication)
                 QuestionViewModel(
                     application.database.questionDao(),
-                    application.database.groupingDao(),
-                    application.database.facultyDao()
+                    application.database.groupingDao()
                 )
             }
         }
