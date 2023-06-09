@@ -7,10 +7,11 @@ import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 
-@Database(entities = [Question::class, Groupation::class], version = 1)
+@Database(entities = [Question::class, Groupation::class, Results::class], version = 1)
 abstract class AppDatabase: RoomDatabase() {
     abstract fun groupingDao(): GroupatioDao
     abstract fun questionDao(): QuestionDao
+    abstract fun resultsDao(): ResultsDao
 
     companion object {
         @Volatile

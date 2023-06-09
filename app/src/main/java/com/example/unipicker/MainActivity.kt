@@ -21,6 +21,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.unipicker.data.Question
+import com.example.unipicker.data.Results
 import com.example.unipicker.ui.question.QuestionViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
@@ -61,6 +62,10 @@ fun UnipickerApp(
         mutableStateOf(mutableListOf<Int>(0,0,0,0,0,0))
     }
 
+//    var sndResults by remember {
+//        mutableStateOf(Results(0, 0, 0))
+//    }
+
     NavHost(
         navController = navController,
         startDestination = unipickerScreen.Home.name,
@@ -82,7 +87,7 @@ fun UnipickerApp(
         }
 
         composable(route = unipickerScreen.Result.name){
-            ResultScreen(navigateToNextScreen = {navController.navigate(unipickerScreen.Home.name)}, state)
+            ResultScreen(navigateToNextScreen = {navController.navigate(unipickerScreen.Home.name)}, state, viewModel)
         }
     }
 }

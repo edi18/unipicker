@@ -29,13 +29,16 @@ import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.unit.dp
+import com.example.unipicker.data.Results
+import com.example.unipicker.ui.question.QuestionViewModel
 import kotlin.math.cos
 import kotlin.math.sin
 
 @Composable
 fun ResultScreen(
     navigateToNextScreen: () -> Unit,
-    results: MutableList<Int>
+    results: MutableList<Int>,
+    viewModel: QuestionViewModel
 ) {
     Column(
         modifier = Modifier
@@ -60,6 +63,10 @@ fun ResultScreen(
                 max = item.second
                 grana = item.first
             }
+        }
+
+        rez.forEachIndexed { index, element ->
+            viewModel.insertResult(Results(grouping = index+1, points = element.second))
         }
 
         val formattedString = rez.joinToString(separator = "\n") { (name, points) ->
@@ -163,7 +170,7 @@ fun SquareCanvas(modifier: Modifier = Modifier, results: MutableList<Int>) {
                     val values = mutableListOf<Float>()
 
                     for (item in results) {
-                        values.add(item.toFloat() / 12.0f)
+                        values.add(item.toFloat() / 18.0f)
                     }
 
                     drawIrregularHexagon(centerX, centerY, initialRadius, values)
