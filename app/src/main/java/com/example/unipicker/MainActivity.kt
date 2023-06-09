@@ -11,6 +11,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.unipicker.ui.home.HomeScreen
 import com.example.unipicker.ui.question.QuestionScreen
@@ -19,6 +20,7 @@ import com.example.unipicker.ui.theme.UnipickerTheme
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.unipicker.data.Question
+import com.example.unipicker.ui.question.QuestionViewModel
 
 
 class MainActivity : ComponentActivity() {
@@ -45,7 +47,9 @@ enum class unipickerScreen() {
 }
 
 @Composable
-fun UnipickerApp() {
+fun UnipickerApp(
+    viewModel: QuestionViewModel = viewModel(factory = QuestionViewModel.factory)
+) {
     val navController = NavHostController(
         context = LocalContext.current
     )
@@ -63,15 +67,6 @@ fun UnipickerApp() {
         }
 
         composable(route = unipickerScreen.Question.name){
-            /*
-            var state = mutableMapOf(
-                "Drustvene nauke" to 0,
-                "Humanisticke nauke" to 0,
-                "Medicina" to 0,
-                "STEM" to 0,
-                "Tehnicke nauke" to 0,
-                "Umjetnost" to 0
-            )*/
 
             var questionsList = listOf<Question>(
 
