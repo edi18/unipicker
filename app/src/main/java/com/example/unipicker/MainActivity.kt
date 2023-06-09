@@ -74,7 +74,7 @@ fun UnipickerApp(
             var currentQuestionIndex by remember { mutableStateOf(0) }
 
             val sendBackResponse = fun (n:Int) {
-                state[questionsList[currentQuestionIndex].grouping] += n
+                state[questionsList[currentQuestionIndex].grouping - 1] += n
                 currentQuestionIndex++
             }
 
@@ -82,14 +82,7 @@ fun UnipickerApp(
         }
 
         composable(route = unipickerScreen.Result.name){
-            ResultScreen(navigateToNextScreen = {navController.navigate(unipickerScreen.Result.name)}, state)
+            ResultScreen(navigateToNextScreen = {navController.navigate(unipickerScreen.Home.name)}, state)
         }
     }
-}
-
-fun <A> convertFlowToList(flowList: Flow<List<A>>): List<A> = runBlocking {
-    flowList
-        .flatMapConcat { it.asFlow() }
-        .flowOn(Dispatchers.Default)
-        .toList()
 }

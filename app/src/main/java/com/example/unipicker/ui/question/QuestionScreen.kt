@@ -1,5 +1,6 @@
 package com.example.unipicker.ui.question
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -73,14 +74,15 @@ fun QuestionScreen(
         Spacer(modifier = Modifier.height(50.dp))
 
         Button(onClick = {
-            if (last)
+            if (last) {
                 navigateToNextScreen()
-            else
-            sendBackResponse(agreementLevel)
+            } else {
+                sendBackResponse(agreementLevel)
+            }
         }) {
 
             Text(
-                text = "Dalje",
+                text = if (!last) "Dalje" else "Završi",
                 style = MaterialTheme.typography.headlineMedium,
                 color = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.padding(6.dp)
